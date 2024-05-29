@@ -1,10 +1,16 @@
-// handler.js
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 
 async function getLinks() {
-    const browser = await puppeteer.launch({ headless: true, executablePath: "/home/sbx_user1051/.cache/puppeteer" });
+    const browser = await puppeteer.launch({
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-scrollbars',
+            '--disable-web-security'
+        ]
+    });
     const page = await browser.newPage();
-    await page.goto('https://vienze.com');
+    await page.goto('https://example.com');
 
     // Mengambil semua elemen <a> dari halaman web
     const links = await page.evaluate(() => {
@@ -21,11 +27,17 @@ async function getLinks() {
     return links;
 }
 
-export default async function handler(request, response) {
+exports.handler = async (event) => {
     try {
         const links = await getLinks();
-        response.status(200).json(links);
+        return {
+            statusCode: 200,
+            body: JSON.stringify(links)
+        };
     } catch (error) {
-        response.status(500).json({ error: error.message });
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: error.message })
+        };
     }
-}
+};
