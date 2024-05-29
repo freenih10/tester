@@ -1,14 +1,7 @@
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 
 async function getLinks() {
-    const browser = await puppeteer.launch({
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-scrollbars',
-            '--disable-web-security'
-        ]
-    });
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
     await page.goto('https://example.com');
 
@@ -27,7 +20,7 @@ async function getLinks() {
     return links;
 }
 
-exports.handler = async (event) => {
+async function handler(event) {
     try {
         const links = await getLinks();
         return {
@@ -40,4 +33,6 @@ exports.handler = async (event) => {
             body: JSON.stringify({ error: error.message })
         };
     }
-};
+}
+
+module.exports = { handler };
