@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer-core');
 
 const app = express();
 
-const browserWSEndpoint = "wss://chrome.browserless.io?token=QC73jXUtJ47Ggt48d68ba609254924d64a7bb79877";
+const browserWSEndpoint = "wss://chrome.browserless.io?token=tokenlu";
 
 const getBrowser = async () => {
   return await puppeteer.connect({ browserWSEndpoint });
