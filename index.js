@@ -1,13 +1,15 @@
+const express = require('express');
 const puppeteer = require('puppeteer-core');
+
+const app = express();
 
 const browserWSEndpoint = "wss://chrome.browserless.io?token=QC73jXUtJ47Ggt48d68ba609254924d64a7bb79877";
 
-// Fungsi untuk mendapatkan browser
 const getBrowser = async () => {
   return await puppeteer.connect({ browserWSEndpoint });
 };
 
-module.exports = async (req, res) => {
+app.get('/api/scrape-links', async (req, res) => {
   let browser = null;
 
   try {
@@ -26,4 +28,10 @@ module.exports = async (req, res) => {
   } finally {
     if (browser) await browser.close();
   }
-};
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+
+module.exports = app;

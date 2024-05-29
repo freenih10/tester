@@ -11,6 +11,7 @@
   "license": "ISC",
 "dependencies": {
     "puppeteer-core": "22.10.0",
-"puppeteer": "22.10.0"
+"puppeteer": "22.10.0",
+"express": "4.19.2"
   }
 }
