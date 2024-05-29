@@ -22,7 +22,7 @@ app.get('/', async (req, res) => {
       return Array.from(anchorTags).map(anchor => anchor.href);
     });
 
-    res.status(200).json(links);
+    res.status(200).json({links});
   } catch (error) {
     res.status(400).send(error.message);
   } finally {
