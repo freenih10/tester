@@ -2,7 +2,7 @@
 const puppeteer = require('puppeteer');
 
 async function getLinks() {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: true, executablePath: "/home/sbx_user1051/.cache/puppeteer" });
     const page = await browser.newPage();
     await page.goto('https://vienze.com');
 
