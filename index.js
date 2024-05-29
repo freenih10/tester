@@ -9,7 +9,7 @@ const getBrowser = async () => {
   return await puppeteer.connect({ browserWSEndpoint });
 };
 
-app.get('/api/scrape-links', async (req, res) => {
+app.get('/', async (req, res) => {
   let browser = null;
 
   try {
